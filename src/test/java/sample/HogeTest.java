@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.Charsets;
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
 import com.google.common.io.Files;
@@ -18,11 +19,17 @@ public class HogeTest {
         Hoge hoge = new Hoge();
         assertThat(hoge.foo(), is("bar"));
 
-        File file = new File("target/surefire-reports", "%HOGE%.txt");
+        File outputDirectory = new File("target/surefire-reports", this.getClass().getCanonicalName());
+        try {
+            FileUtils.forceMkdir(outputDirectory);
+        } catch (IOException e) {
+            throw new AssertionError(e);
+        }
+        File file = new File(outputDirectory, "%HOGE%.txt");
         try {
             Files.write("hogehoge", file, Charsets.UTF_8);
         } catch (IOException e) {
-            // do nothing.
+            throw new AssertionError(e);
         }
     }
 
