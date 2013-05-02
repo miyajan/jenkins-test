@@ -9,10 +9,8 @@ import org.junit.Test;
 
 import com.google.common.io.Files;
 
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
-
-import static org.junit.Assert.*;
 
 public class HogeTest {
 
@@ -33,8 +31,6 @@ public class HogeTest {
         } catch (IOException e) {
             throw new AssertionError(e);
         }
-
-        fail();
     }
 
 }
